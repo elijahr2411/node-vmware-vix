@@ -35,7 +35,8 @@ VIXClient::VIXClient(const Napi::CallbackInfo& info) : Napi::ObjectWrap<VIXClien
         return;
     }
     // Connect to VMWare Workstation
-    VixHandle jobHandle = VixHost_Connect(VIX_API_VERSION, VIX_SERVICEPROVIDER_VMWARE_WORKSTATION, NULL, NULL, NULL, NULL, 0, VIX_INVALID_HANDLE, NULL, NULL);
+    VixHandle jobHandle = VixHost_Connect(VIX_API_VERSION, VIX_SERVICEPROVIDER_VMWARE_WORKSTATION, NULL, 0, NULL, NULL, 0, VIX_INVALID_HANDLE, NULL, NULL);
+
     VixError err = VixJob_Wait(jobHandle, VIX_PROPERTY_JOB_RESULT_HANDLE, &this->_hostHandle, VIX_PROPERTY_NONE);
     if (err != VIX_OK) {
         Napi::Error::New(env, "VIX Failed to Connect").ThrowAsJavaScriptException();

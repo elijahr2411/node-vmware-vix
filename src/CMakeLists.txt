@@ -15,13 +15,14 @@ target_link_libraries(vmware-vix
 	NAPI::napi
 )
 
-set_target_properties(vmware-vix PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}
-)
+# doesnt seem to do anything because cmake-js plays heavy-handed
+#set_target_properties(vmware-vix PROPERTIES
+#	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE}
+#)
 
 
+# Generate node.lib
 if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
-  # Generate node.lib
   execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
 endif()
 
