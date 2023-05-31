@@ -15,6 +15,18 @@ target_link_libraries(vmware-vix
 	NAPI::napi
 )
 
+if(WIN32)
+	target_link_libraries(vmware-vix
+		kernel32
+		user32
+		advapi32
+		ole32
+		oleaut32
+		ws2_32 # oh dear
+		shell32
+	)
+endif()
+
 # doesnt seem to do anything because cmake-js plays heavy-handed
 #set_target_properties(vmware-vix PROPERTIES
 #	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE}
