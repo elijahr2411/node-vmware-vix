@@ -16,6 +16,8 @@ find_library(VMWAREVIX_LIBRARY
 	PATHS
 		/usr/lib
 		/usr/lib/vmware-vix
+		"C:/Program Files (x86)/VMware/VMware VIX"
+		
 )
 
 find_path(VMWAREVIX_INCLUDE_DIR
@@ -23,6 +25,7 @@ find_path(VMWAREVIX_INCLUDE_DIR
 		vix.h
 	PATHS
 		/usr/include/vmware-vix
+		"C:/Program Files (x86)/VMware/VMware VIX"
 )
 
 find_package_handle_standard_args(VMwareVIX REQUIRED_VARS VMWAREVIX_LIBRARY VMWAREVIX_INCLUDE_DIR HANDLE_COMPONENTS)
