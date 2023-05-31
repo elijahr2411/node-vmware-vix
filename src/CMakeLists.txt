@@ -25,6 +25,8 @@ if(WIN32)
 		ws2_32 # oh dear
 		shell32
 	)
+	target_link_options(vmware-vix
+		PUBLIC "/nodefaultlib:libcmt.lib")
 endif()
 
 # doesnt seem to do anything because cmake-js plays heavy-handed

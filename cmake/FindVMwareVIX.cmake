@@ -22,7 +22,6 @@ find_library(VMWAREVIX_LIBRARY
 	NAMES
 		${__VMWAREVIX_LIBRARY_NAME}
 
-	# this is linux only atm sorry
 	PATHS
 		/usr/lib
 		/usr/lib/vmware-vix
