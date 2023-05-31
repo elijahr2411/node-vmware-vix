@@ -7,10 +7,20 @@
 
 include(FindPackageHandleStandardArgs)
 
+if(WIN32)
+	if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+		set(__VMWAREVIX_LIBRARY_NAME "Vix64AllProducts")
+	else()
+		set(__VMWAREVIX_LIBRARY_NAME "VixAllProducts")
+	endif()
+else()
+	# the library name is sane everywhere else
+	set(__VMWAREVIX_LIBRARY_NAME "vixAllProducts")
+endif()
 
 find_library(VMWAREVIX_LIBRARY 
 	NAMES
-		vixAllProducts
+		${__VMWAREVIX_LIBRARY_NAME}
 
 	# this is linux only atm sorry
 	PATHS
@@ -36,7 +46,17 @@ if (VMWAREVIX_FOUND)
 endif()
 
 if (VMWAREVIX_FOUND AND NOT TARGET VMware::VIX)
-  add_library(VMware::VIX SHARED IMPORTED)
-  set_property(TARGET VMware::VIX PROPERTY IMPORTED_LOCATION ${VMWAREVIX_LIBRARY})
-  target_include_directories(VMware::VIX INTERFACE ${VMWAREVIX_INCLUDE_DIR})
+	add_library(VMware::VIX SHARED IMPORTED)
+	if(WIN32)
+		# Windows requires IMPORTED_IMPLIB to be set
+		# (IMPORTED_LOCATION would be set to the DLL path, but we don't care about that)
+		set_property(TARGET VMware::VIX PROPERTY 
+			IMPORTED_IMPLIB ${VMWAREVIX_LIBRARY}
+		)
+  	else()
+  		set_property(TARGET VMware::VIX PROPERTY 
+			IMPORTED_LOCATION ${VMWAREVIX_LIBRARY}
+		)
+	endif()
+	target_include_directories(VMware::VIX INTERFACE ${VMWAREVIX_INCLUDE_DIR})
 endif()
