@@ -20,6 +20,8 @@
   },
   "gypfile": "true",
   "scripts": {
-    "cleanbuild": "node-gyp configure && node-gyp build"
+    "cleanbuild": "node-gyp configure && node-gyp build",
+    "configure": "node-gyp configure",
+    "build": "node-gyp build"
   }
 }

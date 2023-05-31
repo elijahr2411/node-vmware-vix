@@ -1,4 +1,4 @@
 #include <napi.h>
+#include "vix.h"
 
-Napi::String Method(const Napi::CallbackInfo& info);
-Napi::Object Init(Napi::Env env, Napi::Object exports);
+// TODO: make the header file not completely useless

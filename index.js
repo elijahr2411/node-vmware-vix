@@ -1,3 +1,4 @@
 const vmware = require("./build/Release/vmware-vix");
 
-console.log(vmware.hello());
+var vix = new vmware.VIXClient();
+console.log(vix.Test());
