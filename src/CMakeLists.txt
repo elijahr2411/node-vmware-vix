@@ -3,6 +3,10 @@ add_library(vmware-vix SHARED
 	vmware.cpp
 )
 
+target_compile_features(vmware-vix PUBLIC
+	cxx_std_20
+)
+
 set_target_properties(vmware-vix PROPERTIES PREFIX "" SUFFIX ".node")
 
 target_include_directories(vmware-vix PRIVATE
